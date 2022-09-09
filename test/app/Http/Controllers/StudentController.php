@@ -36,12 +36,39 @@ class StudentController extends Controller
         $stu->address = $address;
         $stu->save();
 
-        return redirect()->back()->with('success', 'student Address Successfully');
+        return redirect()->back()->with('success', 'student Add Successfully');
     }
 
     public function editStudent($id){
         $data = student::where('id', '=', $id)->first();
-        return $data;
+        return view('edit-student', compact('data'));
+
+    }
+    public function updateStudent( Request $request){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required',
+        ]);
+        // dd($request->all());
+        $id = $request->id;
+        $name = $request->name;
+        $email = $request->email;
+        $phone = $request->phone;
+        $address = $request->address;
+
+        Student::where('id', '=', $id)->update([
+            'name'=>$name,
+            'email'=>$email,
+            'phone'=>$phone,
+            'address'=>$address,
+        ]);
+        return redirect()->back()->with('success', 'student Updated Successfully');
+    }
+    public function deleteStudent($id){
+        student::where('id','=', $id)->delete();
+        return redirect()->back()->with('success', 'student Delete Successfully');
 
     }
 }
