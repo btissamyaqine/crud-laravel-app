@@ -15,7 +15,7 @@
     <div class="col-md-12">
       <h2>Student List</h2>
       <div style="margin-right: 10%; float: right;">
-        <a href="{{url('add-student')}}">Add</a>
+        <a href="{{url('add-student')}}" class="btn btn-primary">Add Student</a>
       </div>
       <table class="table">
         <thead>
@@ -39,7 +39,7 @@
             <td>{{$student->email}}</td>
             <td>{{$student->phone}}</td>
             <td>{{$student->address}}</td>
-            <td>Edite | Delete</td>
+            <td><a href="{{url('edit-student/'.$student->id)}}" class="btn btn-primary">Editt</a> | Delete</td>
           </tr>
               
           @endforeach
